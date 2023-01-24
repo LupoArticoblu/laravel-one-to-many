@@ -12,6 +12,10 @@ class Portfolio extends Model
 
     protected $fillable = ['title', 'image', 'text', 'date', 'slug', 'image_original_name'];
 
+    public function category(){
+        return $this->belongsTo(category::class);
+    }
+
     public static function generateSlug($string)
     {
         $slug = Str::slug($string, '-');

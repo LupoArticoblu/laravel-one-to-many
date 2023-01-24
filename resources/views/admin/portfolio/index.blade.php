@@ -25,7 +25,7 @@
       @forelse ($portfolios as $portfolio)
         <tr>
           <td>{{$portfolio->id}}</td>
-          <td>{{$portfolio->title}}</td>
+          <td>{{$portfolio->title}} <span class="badge bg-secondary">{{$portfolio->category?->name}}</span></td>
           <td>{{date_format(date_create($portfolio->date), 'Y-m-d')}}</td>
           <td class="d-flex"> 
             <a class="btn btn-danger me-1" href="{{route('admin.portfolio.show', $portfolio)}}">SHOW</a>

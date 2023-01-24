@@ -18,7 +18,9 @@ class CategoryPortfolioSeeder extends Seeder
     {
         $portfolios = Portfolio::all();
         foreach ($portfolios as $portfolio) {
-            $category_id = category::inRandomOrder()
+            $category_id = category::inRandomOrder()->first()->id;
+            $portfolio->category_id = $category_id;
+            $portfolio->update();
         }
     }
 }

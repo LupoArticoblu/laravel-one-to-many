@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Portfolio;
 use App\Http\Requests\StorePortfolioRequest;
 use App\Http\Requests\UpdatePortfolioRequest;
+use App\Models\category;
 use Illuminate\Support\Facades\Storage;
 
 class PortfolioController extends Controller
@@ -19,12 +20,19 @@ class PortfolioController extends Controller
     {
         if(isset($_GET['search'])){
             $search = $_GET['search'];
-            $portfolios = Portfolio::orderby('title','like',"%$search%")->paginate(8);
+            $portfolios = Portfolio::where('title','like',"%$search%")->paginate(8);
         }else{
             $portfolios = Portfolio::orderby('id', 'desc')->paginate(8);
         }
         $direction = 'desc';
         return view('admin.portfolio.index', compact('portfolios', 'direction'));
+    }
+
+    public function category_portfolio(){
+
+        $categories = category::all();
+
+        return view('admin.portfolio.category_portfolio', compact('categories'));
     }
 
     public function orderby($column, $direction)
@@ -41,7 +49,8 @@ class PortfolioController extends Controller
      */
     public function create()
     {
-        return view('admin.portfolio.create');
+        $categories = category::all();
+        return view('admin.portfolio.create', compact('categories'));
     }
 
     /**

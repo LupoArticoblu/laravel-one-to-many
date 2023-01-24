@@ -25,6 +25,7 @@ Route::middleware(['auth', 'verified'])
     ->prefix('admin')
     ->group(function(){
         Route::get('/', [dashboardController::class, 'index'])->name('home');
+        Route::get('/Portfolio/Portfolio-categories', [PortfolioController::class, 'category_portfolio'])->name('category_portfolio');
         Route::resource('portfolio', PortfolioController::class);
         Route::get('portfolios/orderby/{column}/{direction}', [PortfolioController::class, 'orderby'])->name('portfolios.orderby');
     });
