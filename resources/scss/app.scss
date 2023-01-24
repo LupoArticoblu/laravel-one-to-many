@@ -1,0 +1,27 @@
+@import '~bootstrap/scss/bootstrap';
+
+main{
+  overflow: auto;
+}
+
+.main-high,
+main{
+  height: calc(100vh - 56px);
+}
+
+ul{
+  padding: 0;
+  list-style: none;
+}
+
+.ollo{
+  color: gold;
+  text-decoration: none;
+  &:hover{
+    color: aliceblue;
+  }
+}
+
+// .ck-editor_editable[role="textbox"]{
+//   min-height: 400px;
+// }
