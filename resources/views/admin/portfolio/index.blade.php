@@ -30,7 +30,11 @@
           <td class="d-flex"> 
             <a class="btn btn-danger me-1" href="{{route('admin.portfolio.show', $portfolio)}}">SHOW</a>
             <a class="btn btn-primary me-1" href="{{route('admin.portfolio.edit', $portfolio)}}">EDIT</a>
-            <form onsubmit="return confirm('eliminare {{$portfolio->title}}?')" action="{{route('admin.portfolio.destroy', $portfolio)}}" method="POST">@csrf  @method('DELETE') <button type="submit" class="btn btn-dark">DELETE</button></form>
+            <form onsubmit="return confirm('eliminare {{$portfolio->title}}?')" 
+              action="{{route('admin.portfolio.destroy', $portfolio)}}" method="POST">
+              @csrf  @method('DELETE') 
+              <button type="submit" class="btn btn-dark">DELETE</button>
+            </form>
           </td>
         </tr>  
       @empty

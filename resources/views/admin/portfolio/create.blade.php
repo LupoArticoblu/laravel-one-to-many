@@ -33,12 +33,17 @@
                 @enderror
             </div>
 
-            <select class="form-select" aria-label="Default select example">
-                <option selected>Open this select menu</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </select>
+            <select class="form-select" aria-label="Default select example" name="category_id">
+                <option value="" >Seleziona una categoria</option>
+                @foreach ($categories as $category)
+                    <option 
+                    @if($category->id == old('category_id')) 
+                        selected 
+                    @endif
+                    value="{{$category->id}}">{{$category->name}}</option>
+                @endforeach
+            </select>
+
             <div class="mb-3">
                 <label for="image" class="form-lable"></label>
                 <input onchange="showImage(event)" type="file" class="form-control @error('image')

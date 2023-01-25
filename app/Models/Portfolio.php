@@ -10,7 +10,7 @@ class Portfolio extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'image', 'text', 'date', 'slug', 'image_original_name'];
+    protected $fillable = ['title', 'image', 'text', 'date', 'slug', 'image_original_name', 'category_id'];
 
     public function category(){
         return $this->belongsTo(category::class);
