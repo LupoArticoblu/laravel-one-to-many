@@ -9,7 +9,7 @@
   <h1 class="my-3">I miei lavori</h1>
 
   @if (session('deleted'))
-    <div class="alert-success" role="alert">{{session('deleted')}}</div>
+    <div class="alert-success" role="alert">{{session('deleted')}} con successo</div>
   @endif
 
   <table class="table">

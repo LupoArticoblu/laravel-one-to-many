@@ -31,13 +31,13 @@
     </div>
     <select class="form-select" aria-label="Default select example" name="category_id">
       <option value="" >Seleziona una categoria</option>
-      {{-- @foreach ($categories as $category)
+       @foreach ($categories as $category)
           <option 
-          @if($category->id == old('category_id', $portfolio->category?->id)) 
+          @if($category->id == old('category_id', $portfolio->category? $portfolio->category->id : '')) 
               selected 
           @endif
           value="{{$category->id}}">{{$category->name}}</option>
-      @endforeach --}}
+      @endforeach
     </select>
     <div class="mb-3">
       <label for="image" class="form-lable"></label>

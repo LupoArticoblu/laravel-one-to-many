@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\dashboardController;
 use App\Http\Controllers\Admin\PortfolioController;
 use App\Http\Controllers\Guest\PageController;
@@ -27,6 +28,7 @@ Route::middleware(['auth', 'verified'])
         Route::get('/', [dashboardController::class, 'index'])->name('home');
         Route::get('/Portfolio/Portfolio-categories', [PortfolioController::class, 'category_portfolio'])->name('category_portfolio');
         Route::resource('portfolio', PortfolioController::class);
+        Route::resource('categories', CategoryController::class)->except(['show', 'create', 'edit']);
         Route::get('portfolios/orderby/{column}/{direction}', [PortfolioController::class, 'orderby'])->name('portfolios.orderby');
     });
 

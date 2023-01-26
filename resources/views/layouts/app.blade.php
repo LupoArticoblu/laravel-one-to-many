@@ -30,12 +30,12 @@
         <div class="container-fluid main-high">
             <div class="row h-100">
                 @auth
-                <div class="col-1 bg-secondary h-100">
+                <div class="col-2 bg-secondary h-100">
                     @include('admin.partials.side-bar')
 
                 </div>
                 @endauth
-                <div class="@auth col-11 @endauth">
+                <div class="@auth col-10 @endauth">
                     <main>
                         @yield('content')
                     </main>

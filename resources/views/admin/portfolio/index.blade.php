@@ -9,7 +9,7 @@
   <h1 class="my-3">I miei lavori</h1>
 
   @if (session('deleted'))
-    <div class="alert-success" role="alert">{{session('deleted')}}</div>
+    <div class="alert alert-success" role="alert">{{session('deleted')}} con successo</div>
   @endif
 
   <table class="table">
@@ -28,7 +28,6 @@
           <td>{{$portfolio->title}} <span class="badge bg-secondary">{{$portfolio->category?->name}}</span></td>
           <td>{{date_format(date_create($portfolio->date), 'Y-m-d')}}</td>
           <td class="d-flex"> 
-            <a class="btn btn-danger me-1" href="{{route('admin.portfolio.show', $portfolio)}}">SHOW</a>
             <a class="btn btn-primary me-1" href="{{route('admin.portfolio.edit', $portfolio)}}">EDIT</a>
             <form onsubmit="return confirm('eliminare {{$portfolio->title}}?')" 
               action="{{route('admin.portfolio.destroy', $portfolio)}}" method="POST">

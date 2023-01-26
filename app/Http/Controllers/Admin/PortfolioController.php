@@ -101,7 +101,8 @@ class PortfolioController extends Controller
      */
     public function edit(Portfolio $portfolio)
     {
-        return view('admin.portfolio.edit', compact('portfolio'));
+        $categories = category::all();
+        return view('admin.portfolio.edit', compact('portfolio', 'categories'));
     }
 
     /**
@@ -144,7 +145,8 @@ class PortfolioController extends Controller
         if ($portfolio->image) {
             Storage::disk('public')->delete($portfolio->image);
         }
-        $portfolio->delete;
+        $portfolio->delete();
+        
         
         return redirect()->route('admin.portfolio.index')->with('deleted', 'File eliminato');
 
