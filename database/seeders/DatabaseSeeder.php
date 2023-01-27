@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         PortfolioSeeder::class,
         CategorySeeder::class,
         CategoryPortfolioSeeder::class,
+        TagsTableSeeder::class,
         ]);
     }
 }
