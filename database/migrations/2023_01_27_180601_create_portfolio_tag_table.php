@@ -16,6 +16,17 @@ return new class extends Migration
         Schema::create('portfolio_tag', function (Blueprint $table) {
             //$table->id();
             $table->unsignedBigInteger('portfolio_id');
+            $table->foreign('portfolio_id')
+                ->references('id')
+                ->on('portfolios')
+                ->cascadeOnDelete();
+
+            $table->unsignedBigInteger('tag_id');
+            $table->foreign('tag_id')
+                ->reference('id')    
+                ->on('tags')
+                ->cascadeOnDelete();
+
             $table->timestamps();
         });
     }

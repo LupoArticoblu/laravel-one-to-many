@@ -38,7 +38,24 @@
           @endif
           value="{{$category->id}}">{{$category->name}}</option>
       @endforeach
-    </select>
+    </select> 
+
+    <div class="mb-3">
+      <p class="form-lable mt-1">Tags</p>
+      @foreach ($tags as $tag)
+
+      {{-- $Loop->iteration è una proprietà di laravel per rendere dinamici gli id sconosciuti --}}
+          <input id="tag{{$loop->iteration}}" type="checkbox" name="tags[]" value="{{$tag->id}}"
+
+          {{-- metodo del model per verificare i contenuti di un dato array: contain() --}}
+          @if (!$errors->all() && in_array($portfolio->tags->contain($tag)))
+              checked
+          @elseif ($errors->all() && in_array($tag->id, old('tags',[])))    
+          @endif>
+          <label for="tag{{$loop->iteration}}">{{$tag->name}}</label>
+      @endforeach
+    </div>
+
     <div class="mb-3">
       <label for="image" class="form-lable"></label>
       <input onchange="showImage(event)" type="file" class="form-control @error('image')

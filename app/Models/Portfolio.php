@@ -16,6 +16,10 @@ class Portfolio extends Model
         return $this->belongsTo(category::class);
     }
 
+    public function tags(){
+        return $this->belongsToMany(Tag::class);
+    }
+
     public static function generateSlug($string)
     {
         $slug = Str::slug($string, '-');

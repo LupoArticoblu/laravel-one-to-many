@@ -15,7 +15,12 @@
     <h4><span class="badge bg-secondary mt-2">{{$portfolio->category->slug}}</span></h4>
   @endif
 
-
+  @if ($portfolio->tags)
+    @foreach ($portfolio->tags as $tag)
+      <div class="badge text-bg-warning">{{$tag->name}}</div>
+    @endforeach
+    
+  @endif
 
 
   @if ($portfolio->image)

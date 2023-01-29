@@ -1,23 +1,21 @@
 @extends('layouts.app')
 
 @section('title')
-    | Categorie
+    | Tags
 @endsection
 
 @section('content')
 <div class="container">
-  <h1 class="my-3">Gestione categorie</h1>
+  <h1 class="my-3">Gestione dei Tag</h1>
 
   @if (session('message'))
     <div class="alert alert-success" role="alert">{{session('message')}}</div>
   @endif
 
-  <form action="{{route('admin.categories.store')}}" class="table w-50">
-    {{-- mancava --}}
+  <form action="{{route('admin.tag.store')}}" class="table w-50">
     @csrf
     <div class="input-group mb-3">
-      <input name="name" type="text" class="form-control" placeholder="Nuova categoria" aria-label="Recipient's username" aria-describedby="button-addon2">
-                                                {{-- mancava // vi era scritto burron--}}
+      <input name="name" type="text" class="form-control" placeholder="Nuovo Tag" aria-label="Recipient's username" aria-describedby="button-addon2">
       <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Aggiungi</button>
     </div>
   </form>
@@ -25,17 +23,17 @@
   <table class="table w-50">
     <thead>
       <tr>
-        <th scope="col">Categoria</th>
+        <th scope="col">Tag</th>
         <th scope="col">File count</th>
   
       </tr>
       
     </thead>
     <tbody>
-      @forelse ($categories as $portfolio)
+      @forelse ($tags as $portfolio)
       <tr>
           <td class="d-flex">
-            <form action="{{route('admin.categories.update', $portfolio)}}" method="POST">
+            <form action="{{route('admin.tag.update', $portfolio)}}" method="POST">
               @csrf
               {{-- PATC cambia solo ciò che va modificato, PUT cambia tutto --}}
               @method('PATCH')
@@ -44,7 +42,7 @@
             </form>
             
             <form onsubmit="return confirm('eliminare {{$portfolio->title}}?')" 
-              action="{{route('admin.categories.destroy', $portfolio)}}" method="POST">
+              action="{{route('admin.tag.destroy', $portfolio)}}" method="POST">
               @csrf  @method('DELETE') 
               <button type="submit" class="btn btn-dark">DELETE</button>
             </form>

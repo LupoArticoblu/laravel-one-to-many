@@ -25,8 +25,8 @@
             <div class="mb-3">
                 <label for="date" class="form-lable">Data</label>
                 <input type="date" class="form-control @error('date')
-      is-invalid
-    @enderror" id="date"
+                is-invalid
+                @enderror" id="date"
                     value="{{ old('date', date('Y-m-d')) }}" name="date">
                 @error('date')
                     <p class="invalid-feedback">{{ $message }}</p>
@@ -43,6 +43,20 @@
                     value="{{$category->id}}">{{$category->name}}</option>
                 @endforeach
             </select>
+
+            <div class="mb-3">
+                <p class="form-lable mt-1">Tags</p>
+                @foreach ($tags as $tag)
+
+                {{-- $Loop->iteration è una proprietà di laravel per rendere dinamici gli id sconosciuti --}}
+                    <input id="tag{{$loop->iteration}}" type="checkbox" name="tags[]" value="{{$tag->id}}"
+                    @if (in_array($tag->id, old('tags', [])))
+                        checked
+                    @endif>
+                    <label for="tag{{$loop->iteration}}">{{$tag->name}}
+                    </label>
+                @endforeach
+            </div>
 
             <div class="mb-3">
                 <label for="image" class="form-lable"></label>

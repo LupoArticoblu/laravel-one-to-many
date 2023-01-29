@@ -7,6 +7,7 @@ use App\Models\Portfolio;
 use App\Http\Requests\StorePortfolioRequest;
 use App\Http\Requests\UpdatePortfolioRequest;
 use App\Models\category;
+use App\Models\Tag;
 use Illuminate\Support\Facades\Storage;
 
 class PortfolioController extends Controller
@@ -50,7 +51,8 @@ class PortfolioController extends Controller
     public function create()
     {
         $categories = category::all();
-        return view('admin.portfolio.create', compact('categories'));
+        $tags = Tag::all();
+        return view('admin.portfolio.create', compact('categories', 'tags'));
     }
 
     /**
@@ -79,6 +81,10 @@ class PortfolioController extends Controller
 
         $new_portfolio->save();
 
+        if (array_key_exists('tags', $portfolio_data)) {
+            $new_portfolio->tags()->attach($portfolio_data['tags']);
+        }
+
         return redirect()->route('admin.portfolio.show', $new_portfolio)->with('message', 'File aggiunto correttamente');
     }
 
@@ -102,7 +108,8 @@ class PortfolioController extends Controller
     public function edit(Portfolio $portfolio)
     {
         $categories = category::all();
-        return view('admin.portfolio.edit', compact('portfolio', 'categories'));
+        $tags = Tag::all();
+        return view('admin.portfolio.edit', compact('portfolio', 'categories','tags'));
     }
 
     /**
@@ -131,6 +138,13 @@ class PortfolioController extends Controller
         }
         $portfolio->update($portfolio_data);
 
+        if (array_key_exists('tags', $portfolio_data)) {
+            $portfolio->tags()->sync($portfolio_data['tags']);
+        }else{
+            //Array vuoto a Sync() === detach()
+            $portfolio->tags()->sync([]);
+        }
+
         return redirect()->route('admin.portfolio.show', $portfolio)->with('message', 'File aggiornato correttamente');
     }
     
@@ -142,6 +156,8 @@ class PortfolioController extends Controller
      */
     public function destroy(Portfolio $portfolio)
     {
+
+    // Senza cascadeOnDelete() nella migration, qui toccherebbe fare il detach() di $portfolio->tags
         if ($portfolio->image) {
             Storage::disk('public')->delete($portfolio->image);
         }
